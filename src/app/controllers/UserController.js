@@ -28,7 +28,8 @@ class UserController {
         return res.json(user);
     }
 
-    // Edição dos dados
+    // EDIÇÃO DOS DADOS DO USUÁRIO
+
     async update(req, res) {
 
          // Validações de edição do usuário
@@ -42,7 +43,7 @@ class UserController {
             }),
             // garantiar que senha de alteração bate - When password estiver preenchido
             confirmPassword: Yup.string().when('password', (password, field) => {
-                password ? field.required().oneOf([Yup.ref('password')]) : field
+                return password ? field.required().oneOf([Yup.ref('password')]) : field
             })
         });
 
@@ -56,7 +57,7 @@ class UserController {
 
         // Verificar se email já existe ou é igual ao utilizado
         if (email != user.email) {
-            const userExists = await User.findOne({ where: { email}});
+            const userExists = await User.findOne({ where: { email }});
 
             if(userExists) {
                 return res.status(400).json({ error: "User already exists"})
