@@ -1,4 +1,4 @@
-import Sequelize, { Model, VIRTUAL } from "sequelize";
+import Sequelize, { Model } from "sequelize";
 import { isBefore, subHours } from 'date-fns';
 
 class Appointment extends Model {
@@ -25,7 +25,7 @@ class Appointment extends Model {
         }
         );
 
-        return this
+        return this;
     }
 
     static associate(models) {

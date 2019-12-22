@@ -1,5 +1,7 @@
 import "dotenv/config";
+
 import express from "express";
+import cors from 'cors';
 import path from "path";
 import * as Sentry from '@sentry/node'; // Tratativas de erro do sistema
 import Youch from "youch"; // passa config de visualização de erros para o dev
@@ -22,8 +24,9 @@ class App {
 
 
     middlewares() {
-        this.server.use(Sentry.Handlers.requestHandler())
-        this.server.use(express.json()) // possibilita o uso do json
+        this.server.use(Sentry.Handlers.requestHandler());
+        this.server.use(cors());
+        this.server.use(express.json()); // possibilita o uso do json
         this.server.use('/files', express.static(path.resolve(__dirname, '..', 'tmp', 'uploads'))); // utilizado para servir arquivos estaticos
     }
 
@@ -37,7 +40,7 @@ class App {
         /* para tratamento de exeções o express solicita que o async do middleware tenha 4 parametros */
         this.server.use(async(err, req, res, next) => {
 
-            if(process.env.NODE_ENV == development) {
+            if(process.env.NODE_ENV == 'development') {
                 const errors = await new Youch(err, req).toJSON();
 
                 return res.status(500).json(errors)

@@ -1,5 +1,6 @@
 import * as Yup from "Yup"; // importando o arquivo todo, pois não existe export default no arquivo da extensão. - Validação
 import User from "../models/Users";
+import File from "../models/File";
 
 class UserController {
     // Cadastro dos dados
@@ -56,7 +57,7 @@ class UserController {
         const user = await User.findByPk(req.userId);
 
         // Verificar se email já existe ou é igual ao utilizado
-        if (email != user.email) {
+        if (email !== user.email) {
             const userExists = await User.findOne({ where: { email }});
 
             if(userExists) {
@@ -64,19 +65,29 @@ class UserController {
             }
         }
 
-        // Verificar se senha antiga confere
+        // Verificar se senha antiga confere caso a atual seja passada
         if (oldPassword && !(await user.checkPassword(oldPassword))) {
             return res.status(401).json({ error: "Password does not match"})
         }
 
-        const {id, name, provider} = await user.update(req.body);
+        await user.update(req.body);
+
+        const { id, name, avatar } = await User.findByPk(req.userId, { 
+            include: [
+                {
+                    model: File,
+                    as: 'avatar',
+                    attributes: [ 'id', 'path', 'url' ]
+                }
+            ]
+        })
 
         // Usar desestruturação para retornar ao front somente esses campos
         return res.json({
             id,
             name,
             email,
-            provider,
+            avatar
         });
     }
 }

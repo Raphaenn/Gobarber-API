@@ -1,7 +1,7 @@
 // Controller para buscar os usuários que são providers.
 
-import User from "../models/Users"
-import File from "../models/File"
+import User from "../models/Users";
+import File from "../models/File";
 
 class ProviderController {
     async index(req, res) {

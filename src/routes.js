@@ -17,10 +17,13 @@ const routes = new Router();
 const upload = multer(multerConfig);
 
 routes.post('/users', UserController.store);
-routes.put('/users', UserController.update);
+
 
 routes.post('/sessions', SessionController.store);
 routes.use(authMiddleware); // Utilizado para fazer a autenticação do usuário
+
+routes.put('/users', UserController.update); // rota de update
+
 routes.get('/providers', ProviderController.index);
 routes.get('/providers/:providerId/avaliable', AvaliableController.index);
 
