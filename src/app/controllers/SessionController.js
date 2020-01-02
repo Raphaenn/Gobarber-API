@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import * as Yup from "Yup"; // importando o arquivo todo, pois não existe export default no arquivo da extensão. - Validação
+import * as Yup from "yup"; // importando o arquivo todo, pois não existe export default no arquivo da extensão. - Validação
 
 import authConfig from "../../config/auth";
 import User from "../models/Users";

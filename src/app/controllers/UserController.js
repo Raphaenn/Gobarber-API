@@ -1,4 +1,4 @@
-import * as Yup from "Yup"; // importando o arquivo todo, pois não existe export default no arquivo da extensão. - Validação
+import * as Yup from "yup"; // importando o arquivo todo, pois não existe export default no arquivo da extensão. - Validação
 import User from "../models/Users";
 import File from "../models/File";
 

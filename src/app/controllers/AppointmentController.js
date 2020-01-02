@@ -4,7 +4,7 @@ import Appointment from "../models/Appointment"
 import Notification from "../schemas/Notification";
 import { startOfHour, parseISO, isBefore, format, subHours } from "date-fns";
 import pt from 'date-fns/locale/pt'
-import * as Yup from "Yup";
+import * as Yup from "yup";
 import User from "../models/Users";
 import File from "../models/File";
 
