@@ -2,7 +2,6 @@ import Router from "express";
 import multer from "multer"; // Possibilita salvar imagens em banco de dados
 import multerConfig from "./config/multer"; // carrega as configurações do multer
 
-import authMiddleware from "./app/middlewares/auth"; // autenticação de usuários
 import UserController from "./app/controllers/UserController"; // controller cadastro de usuários
 import SessionController from "./app/controllers/SessionController"; // controller de sessão de usuários
 import FileController from "./app/controllers/FileController"; // controle de upload de imagens
@@ -12,6 +11,7 @@ import AppointmentController from "./app/controllers/AppointmentController"; // 
 import ScheduleController from "./app/controllers/ScheduleController"; // controle dos servirços marcados - provider
 import NotificationController from "./app/controllers/NotificationController"; // Rota para listage de notificações 
 
+import authMiddleware from "./app/middlewares/auth"; // autenticação de usuários
 
 const routes = new Router();
 const upload = multer(multerConfig);
